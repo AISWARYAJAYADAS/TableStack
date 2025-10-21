@@ -6,6 +6,7 @@ import MainLayout from './components/Layout/MainLayout'
 import Home from './components/Layout/UI/Pages/Home'
 import FetchOld from './components/Layout/UI/Pages/FetchOld'
 import FetchRQ from './components/Layout/UI/Pages/FetchRQ'
+import FetchRQDetails from './components/Layout/UI/FetchRQDetails'
 
 // create a router setup
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path:'/rq',
     element: <FetchRQ/>
+  },
+  {
+    path: '/rq/:id',
+    element: <FetchRQDetails/>
   }
   ]
 }

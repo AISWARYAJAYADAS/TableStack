@@ -9,3 +9,13 @@ export const getPosts = async () => {
     return response
 }
 
+export const getPostById = async (id) => {
+    try{
+        const response = await apiClient.get(`/posts/${id}`)
+        return response
+    } catch(error){
+        console.log(error)
+        return null
+    }
+}
+

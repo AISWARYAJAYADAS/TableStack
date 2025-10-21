@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 // Assuming getPosts is correctly imported
 import { getPosts } from '../../../../API/api' 
-
+import { NavLink } from 'react-router'
 // Simplified and robust query function
 const getPostData = async () => {
     // Assume getPosts returns the full Axios response object
@@ -23,6 +23,11 @@ const FetchRQ = () => {
         queryFn: getPostData,
         // Optional: time settings for better performance
         staleTime: 5 * 60 * 1000, // Data considered fresh for 5 minutes
+      // staleTime: 5000, // 5 seconds
+      // staleTime: 0, // Data considered fresh for 0 seconds
+      // refetchInterval: 1000, // Refetch every 1 second
+      // refetchIntervalInBackground: true, // Refetch in background
+
     })
 
     return (
@@ -46,15 +51,17 @@ const FetchRQ = () => {
                 {Array.isArray(posts) && posts.length > 0 && posts.map((post) => {
                     const { id, title, body } = post
                     return (
-                        <div key={id} className="p-4 border rounded-lg shadow-sm">
-                            <h2 className="text-lg font-semibold text-indigo-900">{title}</h2>
-                            <p className="text-sm text-gray-600">{body.substring(0, 100)}...</p>
-                        </div>
-                    )
-                })}
-            </div>
+                   <NavLink key={id} to={`/rq/${id}`}>
+                    <div className="p-4 border rounded-lg shadow-md border-gray-200">
+                    <h2 className="text-lg font-semibold text-indigo-900">{title}</h2>
+                    <p className="text-sm text-gray-600">{body.substring(0, 100)}...</p>
+                    </div>
+                    </NavLink>
+                )
+            })}
         </div>
-    )
+    </div>
+  )
 }
 
 export default FetchRQ
